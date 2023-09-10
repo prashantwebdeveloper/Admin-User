@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Register</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+<style>
+    .top{
+        margin-top: 200px;
+        margin-left: 550px;
+    }
+</style>
+<body class="bg-gradient-primary">
+
+    <div class="container top">
+
+        <div class="card o-hidden border-0 shadow-lg my-5 w-75">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row ">
+
+                    <div class="col-lg-12">
+                        <div class="p-5 ">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            </div>
+                            <div id="error"></div>
+                            <form class="user">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                            placeholder="First Name">
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <select name="" class="form-control" id="role">
+                                            <option value="">super admin</option>
+                                            <option value=""> admin</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                        placeholder="Email Address">
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" class="form-control form-control-user"
+                                            id="exampleInputPassword" placeholder="Password">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control form-control-user"
+                                            id="exampleRepeatPassword" placeholder="Repeat Password">
+                                    </div>
+                                </div>
+                                <input href="" type="button" onclick="reg()" value=" Register Account"
+                                    class="btn btn-primary btn-user btn-block">
+
+                                </a>
+                                <hr>
+
+                            </form>
+                            <div class="text-center">
+                                <a class="small" type="" href="">Already have an account?<a class="small" href="#"
+                                        onclick="login()">Login!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+    <script type="text/javascript">
+        function login(){
+            window.location.href="login.html"
+        }
+        let data = [    
+            {
+                id: 80111,
+                name: "dhruv",
+                email: "dhruv@gmail.com",
+                password: 1111,
+                cpassword: 1111,
+                role: "super admin",
+                image: "img/149071.png"
+
+            }
+        ];
+        function reg() {
+            let name = document.getElementById("exampleFirstName").value;
+            let email = document.getElementById("exampleInputEmail").value;
+            let password = document.getElementById("exampleInputPassword").value;
+            let cpassword = document.getElementById("exampleRepeatPassword").value;
+            let role = document.getElementById("role").value;
+            if (name == "" || email == "" || password == "" || cpassword == "") {
+
+                let msg = ` <div class="alert alert-danger" role="alert">
+              fill all details
+            </div>`
+                document.getElementById("error").innerHTML = msg;
+            }
+            else {
+                if (password == cpassword) {
+                    obj = {
+                        name: name,
+                        email: email,
+                        password: password,
+                        cpassword: cpassword,
+                        id: Math.floor(Math.random() * 100000),
+                        role: "admin",
+                        image: "img/149071.png"
+                    }
+                    window.location.href = "login.html";
+
+
+                    if (localStorage.getItem("user") === null || localStorage.getItem("user") === undefined) {
+                        data.push(obj);
+                        localStorage.setItem("user", JSON.stringify(data));
+                        let msg = ` <div class="alert alert-success" role="alert">
+            Successfully Submit 
+            </div>`
+
+                        document.getElementById("error").innerHTML = msg;
+
+                    }
+                    else {
+                        let val = JSON.parse(localStorage.getItem('user'));
+                        val.push(obj);
+                        localStorage.setItem("user", JSON.stringify(val));
+                        let msg = `
+           <div class="alert alert-success" role="alert">
+                Successfully Submit 
+          </div>
+           `
+                        document.getElementById("error").innerHTML = msg;
+
+                    }
+                    document.getElementById("exampleFirstName").value = "";
+
+                    document.getElementById("exampleInputEmail").value = "";
+
+                    document.getElementById("exampleInputPassword").value = "";
+
+                    document.getElementById("exampleRepeatPassword").value = "";
+                }
+                else {
+                    let msg = `
+           <div class="alert alert-danger" role="alert">
+            Password and ConformPassword must be Same
+           </div>
+           `
+                    document.getElementById("error").innerHTML = msg;
+
+                }
+
+
+
+            }
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
